@@ -1,0 +1,9 @@
+body{
+  height: 900px;
+}
+#canvas-contorno{
+  position: absolute;
+  left: 300px;
+  top: 250px;
+  /*border: 1px solid red;*/
+}
