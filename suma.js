@@ -2,21 +2,29 @@
 
 ejercicio1();
 
+
 function ecuacion() {
   var inX = document.getElementById("valor1").value;
   var inY = document.getElementById("valor2").value;
-  document.getElementById("total").value=parseFloat(inX)+parseFloat(inY);
+  var iguala = document.getElementById("valor3").value;
 
+  var x0 = iguala/inX;
+  var y1 = iguala/inY;
+
+  document.getElementById("total").value=parseFloat(x0);
+
+  linea(x0,0,0,y1);
 }
 
 function ejercicio1(){
   ej1=document.getElementById("lienzo1"); //asigno a una variable el elemento del html que voy a usar
   lienzo1=ej1.getContext("2d"); //alisto el canvas para que funcione
-  lienzo1.lineWidth=1; //defino el ancho de la llinea en pixeles
+  lienzo1.lineWidth=1; //defino el ancho de la linea en pixeles
   lienzo1.strokeStyle = '#000000'; //defino el color en hexadecimal
   lienzo1.font="bold 20px sans-serif";
 
   dibujaPlanoCartesiano();
+
 }
 
 function linea(x0,y0,x1,y1){
@@ -57,4 +65,12 @@ function dibujaPlanoCartesiano(){
     auxNum1-=40;
     auxNum2+=40
   }
+}
+
+function lineaaux(x0,y0,x1,y1){
+  lienzo11.beginPath(); //pongo el lapiz
+  lienzo11.moveTo(x0,y0); //lo ubico para iniciar el dibujo
+  lienzo11.lineTo(x1,y1); //trazo la linea hasta este punto
+  lienzo11.stroke(); //levanto el lapiz
+  lienzo11.closePath(); //me alisto para realizar otra parte del dibujo
 }

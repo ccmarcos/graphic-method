@@ -6,9 +6,13 @@
   <link rel="stylesheet" href="estilos.css">
 </head>
     <body>
-        <input type="text" placeholder="primer digito" id="valor1" onkeyup="ecuacion();">
-        <input type="text" placeholder="segundo digito" id="valor2" onkeyup="ecuacion();">
+        <input type="text" id="valor1">X+
+        <input type="text" id="valor2">Y=
+        <input type="text" id="valor3">
+
         <input type="text" id="total" disabled value="0">
+
+        <input type="button" value="click me" onclick="ecuacion()">
 
         <div class="dibujo-canvas" id="canvas-contorno">
           <canvas id="lienzo1" width="510" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
