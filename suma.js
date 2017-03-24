@@ -7,13 +7,16 @@ function ecuacion() {
   var inX = document.getElementById("valor1").value;
   var inY = document.getElementById("valor2").value;
   var iguala = document.getElementById("valor3").value;
-
+  var origenX = 80;
+  var space = 4;
+  var origenY = 440;
   var x0 = iguala/inX;
   var y1 = iguala/inY;
 
+
   document.getElementById("total").value=parseFloat(x0);
 
-  linea(x0,0,0,y1);
+  linea(origenX+(x0*space),origenY+(0*space),origenX+(0*space),origenY-(y1*space));
 }
 
 function ejercicio1(){
