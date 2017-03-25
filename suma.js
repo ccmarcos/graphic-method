@@ -1,18 +1,19 @@
 ejercicio1();
 
-var c=0;
+
 
 function newInput(){
+  var c=0;
   var restriction = document.getElementById("restric").value;
   var inpt1 = document.createElement('input');
   var inpt2 = document.createElement('input');
   var inpt3 = document.createElement('input');
 
   if(restriction){
-  for(var i=0; i<restriction; i++){
-  inpt1.type = "text";
-  inpt1.name = "input1_"+c;
-  inpt1.id = "input1_"+c;
+    for(var i=0; i<restriction; i++){
+    inpt1.type = "text";
+    inpt1.name = "input1_"+c;
+    inpt1.id = "input1_"+c;
 
   document.f1.appendChild(inpt1);
   document.f1.innerHTML+="X+";
@@ -31,9 +32,18 @@ function newInput(){
 
   document.f1.appendChild(inpt3);
   document.f1.innerHTML+="<br/>"
+  }
+  }
 }
 
-}
+function limpiar(){
+  var d = document.getElementById("miform");
+
+  while (d.hasChildNodes()) {
+    d.removeChild(d.firstChild);
+  }
+  lienzo1.clearRect(0,0,510,600);
+  dibujaPlanoCartesiano();
 }
 
 
@@ -58,9 +68,6 @@ function ecuacion() {
     y1 = iguala/inY;
     drawline(x0,0,0,y1);
   }
-
-document.getElementById("total").value=parseFloat(x0);
-
 }
 
 function ejercicio1(){

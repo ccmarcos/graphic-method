@@ -9,15 +9,17 @@
       <input type="text" placeholder="restricciones" id="restric">
       <!--<input type="button" value="aceptar" onclick="dinamic()">-->
       <a href="javascript:newInput()">crear nuevo</a>
-      <form action="suma.js" name="f1">
+
+      <form action="suma.js" name="f1" id="miform">
       </form>
+
 
         <!--<input type="text" id="total" disabled value="0">-->
         <!--<input type="text" id="valor1">x+
         <input type="text" id="valor2">y=
         <input type="text" id="valor3">-->
         <input type="button" value="solve" onclick="ecuacion()">
-
+        <input type="button" onclick="limpiar();" value="limpiar" id="limpiar">
         <div class="dibujo-canvas" id="canvas-contorno">
           <canvas id="lienzo1" width="510" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
         </div>
