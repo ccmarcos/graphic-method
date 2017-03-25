@@ -38,9 +38,9 @@ function newInput(){
 
 
 function ecuacion() {
-  var inX = document.getElementById("valor1").value;
-  var inY = document.getElementById("valor2").value;
-  var iguala = document.getElementById("valor3").value;
+  var inX = document.getElementById("input1_0").value;
+  var inY = document.getElementById("input2_0").value;
+  var iguala = document.getElementById("input3_0").value;
   var x0;
   var y1;
   var y;
