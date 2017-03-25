@@ -1,16 +1,25 @@
-
-
 ejercicio1();
+
+var c=0;
+function newInput(){
+  var inpt = document.createElement('input');
+  inpt.type = "text";
+  inpt.name = "input_"+c;
+  inpt.id = "input_"+c;
+  c+=1;
+  document.f1.appendChild(inpt);
+  document.f1.innerHTML+="<br/>";
+}
 
 
 function ecuacion() {
   var inX = document.getElementById("valor1").value;
   var inY = document.getElementById("valor2").value;
   var iguala = document.getElementById("valor3").value;
-  var x0; //= iguala/inX;
-  var y1; //= iguala/inY;
-  var y; // cuando y = 0
-  var x; // cuando x = 0
+  var x0;
+  var y1;
+  var y;
+  var x;
 
   if(inX==0){
     y = iguala;
@@ -27,7 +36,6 @@ function ecuacion() {
 
 document.getElementById("total").value=parseFloat(x0);
 
-  //drawline(x0,0,0,y1);
 }
 
 function ejercicio1(){

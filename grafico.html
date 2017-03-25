@@ -6,13 +6,18 @@
   <link rel="stylesheet" href="estilos.css">
 </head>
     <body>
-        <input type="text" id="valor1">X+
-        <input type="text" id="valor2">Y=
+      <input type="text" placeholder="restricciones" id="restric">
+      <!--<input type="button" value="aceptar" onclick="dinamic()">-->
+      <br/><br/>
+      <a href="javascript:newInput()">crear nuevo</a>
+      <form name="f1">
+      </form>
+
+        <!--<input type="text" id="total" disabled value="0">-->
+        <input type="text" id="valor1">x+
+        <input type="text" id="valor2">y=
         <input type="text" id="valor3">
-
-        <input type="text" id="total" disabled value="0">
-
-        <input type="button" value="click me" onclick="ecuacion()">
+        <input type="button" value="solve" onclick="ecuacion()">
 
         <div class="dibujo-canvas" id="canvas-contorno">
           <canvas id="lienzo1" width="510" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
