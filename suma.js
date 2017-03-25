@@ -7,16 +7,27 @@ function ecuacion() {
   var inX = document.getElementById("valor1").value;
   var inY = document.getElementById("valor2").value;
   var iguala = document.getElementById("valor3").value;
-  var origenX = 80;
-  var space = 4;
-  var origenY = 440;
-  var x0 = iguala/inX;
-  var y1 = iguala/inY;
+  var x0; //= iguala/inX;
+  var y1; //= iguala/inY;
+  var y; // cuando y = 0
+  var x; // cuando x = 0
 
+  if(inX==0){
+    y = iguala;
+    drawline(0,y,100,y);
+  }
+  else if (inY==0){
+    x = iguala;
+    drawline(x,0,x,100);
+  }else {
+    x0 = iguala/inX;
+    y1 = iguala/inY;
+    drawline(x0,0,0,y1);
+  }
 
-  document.getElementById("total").value=parseFloat(x0);
+document.getElementById("total").value=parseFloat(x0);
 
-  linea(origenX+(x0*space),origenY+(0*space),origenX+(0*space),origenY-(y1*space));
+  //drawline(x0,0,0,y1);
 }
 
 function ejercicio1(){
@@ -70,10 +81,9 @@ function dibujaPlanoCartesiano(){
   }
 }
 
-function lineaaux(x0,y0,x1,y1){
-  lienzo11.beginPath(); //pongo el lapiz
-  lienzo11.moveTo(x0,y0); //lo ubico para iniciar el dibujo
-  lienzo11.lineTo(x1,y1); //trazo la linea hasta este punto
-  lienzo11.stroke(); //levanto el lapiz
-  lienzo11.closePath(); //me alisto para realizar otra parte del dibujo
+function drawline(x0,y0,x1,y1){
+  var origenX = 80;
+  var space = 4;
+  var origenY = 440;
+  linea(origenX+(x0*space),origenY-(y0*space),origenX+(x1*space),origenY-(y1*space));
 }
