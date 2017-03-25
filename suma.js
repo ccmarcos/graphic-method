@@ -1,7 +1,5 @@
 ejercicio1();
 
-
-
 function newInput(){
   var c=0;
   var restriction = document.getElementById("restric").value;
@@ -48,9 +46,11 @@ function limpiar(){
 
 
 function ecuacion() {
-  var inX = document.getElementById("input1_0").value;
-  var inY = document.getElementById("input2_0").value;
-  var iguala = document.getElementById("input3_0").value;
+  var restriction = document.getElementById("restric").value;
+  for(var i=0; i<restriction; i++){
+  var inX = document.getElementById("input1_"+i).value;
+  var inY = document.getElementById("input2_"+i).value;
+  var iguala = document.getElementById("input3_"+i).value;
   var x0;
   var y1;
   var y;
@@ -69,7 +69,7 @@ function ecuacion() {
     drawline(x0,0,0,y1);
   }
 }
-
+}
 function ejercicio1(){
   ej1=document.getElementById("lienzo1"); //asigno a una variable el elemento del html que voy a usar
   lienzo1=ej1.getContext("2d"); //alisto el canvas para que funcione
