@@ -44,32 +44,54 @@ function limpiar(){
   dibujaPlanoCartesiano();
 }
 
-
 function ecuacion() {
-  var restriction = document.getElementById("restric").value;
-  for(var i=0; i<restriction; i++){
-  var inX = document.getElementById("input1_"+i).value;
-  var inY = document.getElementById("input2_"+i).value;
-  var iguala = document.getElementById("input3_"+i).value;
+  var inX;
+  var inY;
+  var iguala;
   var x0;
   var y1;
-  var y;
-  var x;
+  var x; //cuando la entrada de x sea cero
+  var y; //cuando la entrada de y sea cero
+  var restriction = document.getElementById("restric").value;
+  for(var i=0; i<restriction; i++){
+    inX = document.getElementById("input1_"+i).value;
+    inY = document.getElementById("input2_"+i).value;
+    iguala = document.getElementById("input3_"+i).value;
 
+
+  if(inY==0){
+      x = iguala/inX;
+      drawline(x,0,x,100);
+    }
   if(inX==0){
-    y = iguala;
-    drawline(0,y,100,y);
+      y = iguala/inY;
+      drawline(0,y,100,y);
   }
-  else if (inY==0){
-    x = iguala;
-    drawline(x,0,x,100);
-  }else {
-    x0 = iguala/inX;
-    y1 = iguala/inY;
-    drawline(x0,0,0,y1);
+  x0 = iguala/inX;
+  y1 = iguala/inY;
+
+  if(x0<0 || y1<0){
+    pendiente(x0,0,0,y1);
+  }
+  if(x0==0 && y1==0){
+    y = -1*(inX)/inY;
+    x = 1;
+    pendiente(0,0,x,y);
+    document.getElementById("total").value=parseFloat(x);
+  }
+
   }
 }
+
+function pendiente(x0,y0,x1,y1){
+  var m = (y1-y0)/(x1-x0);
+  var x = 100;
+  var yp = m*(x-x0)+y0;
+  if(x0<0 || y1<0)
+    drawline(x,yp,x1,y1);
+  else drawline(x0,y0,x,yp);
 }
+
 function ejercicio1(){
   ej1=document.getElementById("lienzo1"); //asigno a una variable el elemento del html que voy a usar
   lienzo1=ej1.getContext("2d"); //alisto el canvas para que funcione
@@ -78,7 +100,6 @@ function ejercicio1(){
   lienzo1.font="bold 20px sans-serif";
 
   dibujaPlanoCartesiano();
-
 }
 
 function linea(x0,y0,x1,y1){
