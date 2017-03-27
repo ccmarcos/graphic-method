@@ -57,7 +57,7 @@ function ecuacion() {
     inX = document.getElementById("input1_"+i).value;
     inY = document.getElementById("input2_"+i).value;
     iguala = document.getElementById("input3_"+i).value;
-
+document.getElementById("total").value=parseFloat(inX);
 
   if(inY==0){
       x = iguala/inX;
@@ -77,9 +77,9 @@ function ecuacion() {
     y = -1*(inX)/inY;
     x = 1;
     pendiente(0,0,x,y);
-    document.getElementById("total").value=parseFloat(x);
-  }
-
+    //document.getElementById("total").value=parseFloat(x);
+  }else
+    drawline(x0,0,0,y1);
   }
 }
 
