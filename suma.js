@@ -1,5 +1,5 @@
 ejercicio1();
-drawIntersection(20,60);
+
 function newInput(){
   var c=0;
   var restriction = document.getElementById("restric").value;
@@ -52,12 +52,26 @@ function ecuacion() {
   var y1;
   var x; //cuando la entrada de x sea cero
   var y; //cuando la entrada de y sea cero
+  var x1matriz, x2matriz;
+  var y1matriz, y2matriz;
+  var c1matriz, c2matriz;
   var restriction = document.getElementById("restric").value;
+  var matriz = new Array(3);
+
+
+  for(var i=0; i<3; i++){
+    matriz[i] = new Array(3);
+  }
+
   for(var i=0; i<restriction; i++){
     inX = document.getElementById("input1_"+i).value;
     inY = document.getElementById("input2_"+i).value;
     iguala = document.getElementById("input3_"+i).value;
-document.getElementById("total").value=parseFloat(inX);
+    //document.getElementById("total").value=parseFloat(inX);
+
+    matriz[i][0] = inX;
+    matriz[i][1] = inY;
+    matriz[i][2] = iguala;
 
   if(inY==0){
       x = iguala/inX;
@@ -81,7 +95,29 @@ document.getElementById("total").value=parseFloat(inX);
   }else
     drawline(x0,0,0,y1);
   }
+
+  for(var i=0; i<1; i++){
+    x1matriz = matriz[i][0];
+    y1matriz = matriz[i][1];
+    c1matriz = matriz[i][2];
+    x2matriz = matriz[i+1][0];
+    y2matriz = matriz[i+1][1];
+    c2matriz = matriz[i+1][2];
+  }
+  document.getElementById("total").value=parseFloat(c2matriz);
+  interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
+
+function interseccion(x1,y1,c1,x2,y2,c2){
+  var y;
+  var x;
+
+  y = (c1-((x1/x2)*c2))/(parseFloat((-x1*y2)/x2)+parseFloat(y1));
+  document.getElementById("total").value=parseFloat(y);
+  x = (c2-(y2*y))/x2;
+  punto(x,y);
+}
+
 
 function pendiente(x0,y0,x1,y1){
   var m = (y1-y0)/(x1-x0);
@@ -92,15 +128,8 @@ function pendiente(x0,y0,x1,y1){
   else drawline(x0,y0,x,yp);
 }
 
-function interesection(x1,x2,y1,y2,c1,c2){
-  var y;
-  var x;
 
-  y = (c1-(x1*c2))/((-x1*y2)+y1);
-  x = c2-(y2*y);
-}
-
-function drawIntersection(x,y){
+function punto(x,y){
   var origenX = 80;
   var space = 4;
   var origenY = 440;
