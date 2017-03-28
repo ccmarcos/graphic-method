@@ -1,5 +1,5 @@
 ejercicio1();
-
+drawIntersection(20,60);
 function newInput(){
   var c=0;
   var restriction = document.getElementById("restric").value;
@@ -9,28 +9,28 @@ function newInput(){
 
   if(restriction){
     for(var i=0; i<restriction; i++){
-    inpt1.type = "text";
-    inpt1.name = "input1_"+c;
-    inpt1.id = "input1_"+c;
+      inpt1.type = "text";
+      inpt1.name = "input1_"+c;
+      inpt1.id = "input1_"+c;
 
-  document.f1.appendChild(inpt1);
-  document.f1.innerHTML+="X+";
+      document.f1.appendChild(inpt1);
+      document.f1.innerHTML+="X+";
 
-  inpt2.type="text";
-  inpt2.name = "input2_"+c;
-  inpt2.id = "input2_"+c;
+      inpt2.type="text";
+      inpt2.name = "input2_"+c;
+      inpt2.id = "input2_"+c;
 
-  document.f1.appendChild(inpt2);
-  document.f1.innerHTML+="Y=";
+      document.f1.appendChild(inpt2);
+      document.f1.innerHTML+="Y=";
 
-  inpt3.type = "text";
-  inpt3.name = "input3_"+c;
-  inpt3.id = "input3_"+c;
-  c+=1;
+      inpt3.type = "text";
+      inpt3.name = "input3_"+c;
+      inpt3.id = "input3_"+c;
+      c+=1;
 
-  document.f1.appendChild(inpt3);
-  document.f1.innerHTML+="<br/>"
-  }
+      document.f1.appendChild(inpt3);
+      document.f1.innerHTML+="<br/>"
+    }
   }
 }
 
@@ -90,6 +90,24 @@ function pendiente(x0,y0,x1,y1){
   if(x0<0 || y1<0)
     drawline(x,yp,x1,y1);
   else drawline(x0,y0,x,yp);
+}
+
+function interesection(x1,x2,y1,y2,c1,c2){
+  var y;
+  var x;
+
+  y = (c1-(x1*c2))/((-x1*y2)+y1);
+  x = c2-(y2*y);
+}
+
+function drawIntersection(x,y){
+  var origenX = 80;
+  var space = 4;
+  var origenY = 440;
+
+  lienzo1.beginPath();
+  lienzo1.arc(origenX+(x*space),origenY-(y*space),4,0,2*Math.PI);
+  lienzo1.fill();
 }
 
 function ejercicio1(){
