@@ -59,7 +59,7 @@ function ecuacion() {
   var matriz = new Array(3);
 
 
-  for(var i=0; i<3; i++){
+  for(var i=0; i<restriction; i++){
     matriz[i] = new Array(3);
   }
 
@@ -95,26 +95,41 @@ function ecuacion() {
   }else
     drawline(x0,0,0,y1);
   }
+  //document.getElementById("total").value=parseFloat(matriz[1][1]);
 
-  for(var i=0; i<1; i++){
-    x1matriz = matriz[i][0];
-    y1matriz = matriz[i][1];
-    c1matriz = matriz[i][2];
-    x2matriz = matriz[i+1][0];
-    y2matriz = matriz[i+1][1];
-    c2matriz = matriz[i+1][2];
+  for(var i=0; i<restriction; i++){
+    for(var j=i+1; j<restriction; j++){
+      x1matriz = matriz[i][0];
+      y1matriz = matriz[i][1];
+      c1matriz = matriz[i][2];
+      x2matriz = matriz[j][0];
+      y2matriz = matriz[j][1];
+      c2matriz = matriz[j][2];
+      interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
+    }
+
   }
-  document.getElementById("total").value=parseFloat(c2matriz);
-  interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
+  //document.getElementById("total").value=parseFloat(c2matriz);
+  //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
 
 function interseccion(x1,y1,c1,x2,y2,c2){
   var y;
   var x;
 
-  y = (c1-((x1/x2)*c2))/(parseFloat((-x1*y2)/x2)+parseFloat(y1));
+  if(x2==0){
+    y = c2/y2;
+    x = (c1-(y*y1))/x1;
+  }
+  else if(y2==0){
+    x = c2/x2;
+    y = (c1-(x*x1))/y1;
+  }
+  else{
+    y = (c1-((x1/x2)*c2))/(parseFloat((-x1*y2)/x2)+parseFloat(y1));
+    x = (c2-(y2*y))/x2;
+  }
   document.getElementById("total").value=parseFloat(y);
-  x = (c2-(y2*y))/x2;
   punto(x,y);
 }
 
