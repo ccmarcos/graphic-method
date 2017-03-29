@@ -2,10 +2,12 @@ ejercicio1();
 
 function newInput(){
   var c=0;
+  var array = ["<=","=",">="];
   var restriction = document.getElementById("restric").value;
   var inpt1 = document.createElement('input');
   var inpt2 = document.createElement('input');
   var inpt3 = document.createElement('input');
+  var selectList = document.createElement('select');
 
   if(restriction){
     for(var i=0; i<restriction; i++){
@@ -21,13 +23,25 @@ function newInput(){
       inpt2.id = "input2_"+c;
 
       document.f1.appendChild(inpt2);
-      document.f1.innerHTML+="Y=";
+      document.f1.innerHTML+="Y";
 
       inpt3.type = "text";
       inpt3.name = "input3_"+c;
       inpt3.id = "input3_"+c;
+      //c+=1;
+
+      selectList.id = "input4_"+c;
+      document.f1.appendChild(selectList);
+
       c+=1;
 
+      for (var j = 0; j < array.length; j++) {
+        var option = document.createElement("option");
+        option.value = array[j];
+        option.text = array[j];
+        selectList.appendChild(option);
+      }
+      //document.getElementById("total").value=parseFloat(i);
       document.f1.appendChild(inpt3);
       document.f1.innerHTML+="<br/>"
     }
@@ -67,7 +81,10 @@ function ecuacion() {
     inX = document.getElementById("input1_"+i).value;
     inY = document.getElementById("input2_"+i).value;
     iguala = document.getElementById("input3_"+i).value;
+
+    seleccion = document.getElementById("input4_"+i).value;
     //document.getElementById("total").value=parseFloat(inX);
+    document.getElementById("total").value=(seleccion);
 
     matriz[i][0] = inX;
     matriz[i][1] = inY;
@@ -129,7 +146,7 @@ function interseccion(x1,y1,c1,x2,y2,c2){
     y = (c1-((x1/x2)*c2))/(parseFloat((-x1*y2)/x2)+parseFloat(y1));
     x = (c2-(y2*y))/x2;
   }
-  document.getElementById("total").value=parseFloat(y);
+  //document.getElementById("total").value=parseFloat(y);
   punto(x,y);
 }
 
