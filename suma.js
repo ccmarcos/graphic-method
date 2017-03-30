@@ -171,7 +171,7 @@ function ecuacion() {
     interseccion2(tres,cuatro);
 
   }
-
+  interseccion2(0,0);
   for(var i=0; i<restriction; i++){
     for(var j=i+1; j<restriction; j++){
       x1matriz = matriz[i][0];
@@ -184,7 +184,7 @@ function ecuacion() {
     }
   }
   document.getElementById("total").value=parseFloat(optima[1]);
-  puntoConvex(optima[0],optima[1]);
+  //puntoConvex(optima[0],optima[1]);
   //document.getElementById("total").value=parseFloat(matriz2[0][0]);
   //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
@@ -213,7 +213,7 @@ function interseccion2(x,y){
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
   if(convex==entradas){
-    //puntoConvex(x,y);
+    puntoConvex(x,y);
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
@@ -268,7 +268,7 @@ function interseccion(x1,y1,c1,x2,y2,c2){
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
   if(convex==entradas){
-    //puntoConvex(x,y);
+    puntoConvex(x,y);
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
