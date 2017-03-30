@@ -2,7 +2,11 @@ ejercicio1();
 var matriz = new Array(4);
 var matriz2 = new Array(4);
 var matriz3 = new Array(2);
-
+var optima =  new Array(2);
+var optimo = 0;
+var auxoptimo;
+var objetivoX;
+var objetivoY;
 function newInput(){
   var c=0;
   var array = ["<=","=",">="];
@@ -77,6 +81,9 @@ function ecuacion() {
   var restriction = document.getElementById("restric").value;
   //var matriz = new Array(4);
 
+  objetivoX = document.getElementById("objX").value;
+  objetivoY = document.getElementById("objY").value;
+
   dimM3 = restriction*2;
   for(var i=0; i<restriction; i++){
     matriz[i] = new Array(4);
@@ -86,6 +93,7 @@ function ecuacion() {
   for(var j=0; j<dimM3; j++){
     matriz3[i] = new Array(2);
   }
+
 
   for(var i=0; i<restriction; i++){
     inX = document.getElementById("input1_"+i).value;
@@ -175,7 +183,8 @@ function ecuacion() {
       interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
     }
   }
-
+  document.getElementById("total").value=parseFloat(optima[1]);
+  puntoConvex(optima[0],optima[1]);
   //document.getElementById("total").value=parseFloat(matriz2[0][0]);
   //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
@@ -203,9 +212,16 @@ function interseccion2(x,y){
 
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
-  if(convex==entradas)
-    puntoConvex(x,y);
-document.getElementById("total").value=parseFloat(convex);
+  if(convex==entradas){
+    //puntoConvex(x,y);
+    auxoptimo = objetivoX*x + objetivoY*y;
+    if(auxoptimo > optimo){
+      optimo = auxoptimo;
+      optima[0] = x;
+      optima[1] = y;
+      }
+  }
+//document.getElementById("total").value=parseFloat(convex);
 
 }
 
@@ -215,7 +231,6 @@ function interseccion(x1,y1,c1,x2,y2,c2){
   var entradas = document.getElementById("restric").value;
   var y;
   var x;
-
 
   if(x2==0){
     y = c2/y2;
@@ -252,10 +267,15 @@ function interseccion(x1,y1,c1,x2,y2,c2){
 
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
-  if(convex==entradas)
-    puntoConvex(x,y);
-
-
+  if(convex==entradas){
+    //puntoConvex(x,y);
+    auxoptimo = objetivoX*x + objetivoY*y;
+    if(auxoptimo > optimo){
+      optimo = auxoptimo;
+      optima[0] = x;
+      optima[1] = y;
+      }
+    }
 /*
       document.getElementById("total").value=parseFloat(convex);
       convex--;
@@ -279,7 +299,7 @@ function pendiente(x0,y0,x1,y1){
     }
 }
 
-/*
+
 function punto(x,y){
   var origenX = 80;
   var space = 4;
@@ -288,7 +308,7 @@ function punto(x,y){
   lienzo1.beginPath();
   lienzo1.arc(origenX+(x*space),origenY-(y*space),4,0,2*Math.PI);
   lienzo1.fill();
-}*/
+}
 
 function puntoConvex(x,y){
   var origenX = 80;
