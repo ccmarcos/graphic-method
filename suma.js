@@ -1,5 +1,7 @@
 ejercicio1();
 var matriz = new Array(4);
+var matriz2 = new Array(4);
+var matriz3 = new Array(2);
 
 function newInput(){
   var c=0;
@@ -60,6 +62,7 @@ function limpiar(){
 }
 
 function ecuacion() {
+  var dimM3;
   var opcion;
   var inX;
   var inY;
@@ -74,8 +77,14 @@ function ecuacion() {
   var restriction = document.getElementById("restric").value;
   //var matriz = new Array(4);
 
+  dimM3 = restriction*2;
   for(var i=0; i<restriction; i++){
     matriz[i] = new Array(4);
+    matriz2[i] = new Array(4);
+  }
+
+  for(var j=0; j<dimM3; j++){
+    matriz3[i] = new Array(2);
   }
 
   for(var i=0; i<restriction; i++){
@@ -99,26 +108,61 @@ function ecuacion() {
   if(inY==0){
       x = iguala/inX;
       drawline(x,0,x,100);
+      matriz2[i][0] = x;
+      matriz2[i][1] = 0;
+      matriz2[i][2] = x;
+      matriz2[i][3] = 100;
     }
   if(inX==0){
       y = iguala/inY;
-      drawline(0,y,100,y);
-  }
-  x0 = iguala/inX;
-  y1 = iguala/inY;
+      //drawline(0,y,100,y);
+      drawline(100,y,0,y);
+      matriz2[i][0] = 100;
 
-  if(x0<0 || y1<0){
-    pendiente(x0,0,0,y1);
-  }
-  if(x0==0 && y1==0){
-    y = -1*(inX)/inY;
-    x = 1;
-    pendiente(0,0,x,y);
+      matriz2[i][1] = y;
+      matriz2[i][2] = 0;
+      matriz2[i][3] = y;
+  }else{
+    x0 = iguala/inX;
+    y1 = iguala/inY;
+
+    if(x0<0 || y1<0){
+      pendiente(x0,0,0,y1);
+      matriz2[i][0] = x0;
+      matriz2[i][1] = 0;
+      matriz2[i][2] = 0;
+      matriz2[i][3] = y1;
+    }
+
+    if(x0==0 && y1==0){
+      y = -1*(inX)/inY;
+      x = 1;
+      pendiente(0,0,x,y);
+      matriz2[i][0] = 0;
+      matriz2[i][1] = 0;
+      matriz2[i][2] = x;
+      matriz2[i][3] = y;
     //document.getElementById("total").value=parseFloat(x);
-  }else
-    drawline(x0,0,0,y1);
+    }else{
+      drawline(x0,0,0,y1);
+      matriz2[i][0] = x0;
+      matriz2[i][1] = 0;
+      matriz2[i][2] = 0;
+      matriz2[i][3] = y1;
+      }
+    }
   }
-  //document.getElementById("total").value=parseFloat(matriz[1][1]);
+  //document.getElementById("total").value=parseFloat(matriz2[1][0]);
+  for(var j=0; j<restriction;j++){
+    var uno, dos,tres,cuatro;
+    uno = matriz2[j][0];
+    dos = matriz2[j][1];
+    interseccion2(uno,dos);
+    tres = matriz2[j][2];
+    cuatro = matriz2[j][3];
+    interseccion2(tres,cuatro);
+
+  }
 
   for(var i=0; i<restriction; i++){
     for(var j=i+1; j<restriction; j++){
@@ -130,17 +174,48 @@ function ecuacion() {
       c2matriz = matriz[j][2];
       interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
     }
-
   }
-  //document.getElementById("total").value=parseFloat(c2matriz);
+
+  //document.getElementById("total").value=parseFloat(matriz2[0][0]);
   //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
+}
+
+
+function interseccion2(x,y){
+  var convex=0;
+  var entradas = document.getElementById("restric").value;
+  for(var i=0; i<entradas; i++){
+    if(matriz[i][3]==0){
+      if((matriz[i][0]*x + matriz[i][1]*y) <= matriz[i][2] )
+      convex++;
+    }
+    if(matriz[i][3]==1){
+      if((matriz[i][0]*x + matriz[i][1]*y) == matriz[i][2] )
+      convex++;
+    }
+    if(matriz[i][3]==2){
+      if((matriz[i][0]*x + matriz[i][1]*y) >= matriz[i][2] )
+      convex++;
+    }
+  }
+  if(x>=0 && y>=0)
+    convex++;
+
+  //document.getElementById("total").value=parseFloat(convex);
+  convex--;
+  if(convex==entradas)
+    puntoConvex(x,y);
+document.getElementById("total").value=parseFloat(convex);
+
 }
 
 function interseccion(x1,y1,c1,x2,y2,c2){
   var convex=0;
+
   var entradas = document.getElementById("restric").value;
   var y;
   var x;
+
 
   if(x2==0){
     y = c2/y2;
@@ -175,10 +250,19 @@ function interseccion(x1,y1,c1,x2,y2,c2){
   if(x>0 && y>0)
     convex++;
 
-  document.getElementById("total").value=parseFloat(convex);
+  //document.getElementById("total").value=parseFloat(convex);
   convex--;
   if(convex==entradas)
     puntoConvex(x,y);
+
+
+/*
+      document.getElementById("total").value=parseFloat(convex);
+      convex--;
+      if(convex==entradas)
+        puntoConvex(x,y);
+*/
+
   //document.getElementById("total").value=parseFloat(matriz[0][2]);
 }
 
@@ -187,9 +271,12 @@ function pendiente(x0,y0,x1,y1){
   var m = (y1-y0)/(x1-x0);
   var x = 100;
   var yp = m*(x-x0)+y0;
-  if(x0<0 || y1<0)
+  if(x0<0 || y1<0){
     drawline(x,yp,x1,y1);
-  else drawline(x0,y0,x,yp);
+  }
+  else {
+      drawline(x0,y0,x,yp);
+    }
 }
 
 /*
