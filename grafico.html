@@ -7,6 +7,10 @@
 </head>
     <body>
       Función objetivo<br/>
+      <select id="maxORmin">
+        <option value="max">Max</option>
+        <option value="min">Min</option>
+      </select>
       Z=
       <input type="text" name="restricX" id="objX">X+
       <input type="text" name="restricY" id="objY">Y<br/><br/>
@@ -28,6 +32,11 @@
 
         <div class="dibujo-canvas" id="canvas-contorno">
           <canvas id="lienzo1" width="520" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
+        </div>
+
+        <div id="solucion">
+        </div>
+        <div id="solucionZ">
         </div>
     </body>
 </html>

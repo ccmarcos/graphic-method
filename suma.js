@@ -3,12 +3,17 @@ var matriz = new Array(4);
 var matriz2 = new Array(4);
 var matriz3 = new Array(2);
 var optima =  new Array(2);
-var puntos = new Array()
+var puntos = new Array();
+var arrayX = new Array();
+var arrayY = new Array();
 var optimo = 0;
 var auxoptimo;
 var objetivoX;
 var objetivoY;
 var pos=1;
+var space=4;
+var maxmin;
+var grande = 100000000;
 function newInput(){
   var c=0;
   var array = ["<=","=",">="];
@@ -82,10 +87,17 @@ function ecuacion() {
   var y1matriz, y2matriz;
   var c1matriz, c2matriz;
   var restriction = document.getElementById("restric").value;
-  //var matriz = new Array(4);
+  var solucion = document.getElementById("solucion");
+  var solucionZ =  document.getElementById("solucionZ");
 
-  objetivoX = document.getElementById("objX").value;
-  objetivoY = document.getElementById("objY").value;
+  //var matriz = new Array(4);
+  maxmin = document.getElementById("maxORmin").value;
+  objetivoX = document.getElementById("objX").value; //valores de z
+  objetivoY = document.getElementById("objY").value; //valores de z
+
+  if(maxmin=="max")
+    maxmin=0;
+  else maxmin=1;
 
   dimM3 = restriction*2;
   for(var i=0; i<restriction; i++){
@@ -172,8 +184,8 @@ function ecuacion() {
     tres = matriz2[j][2];
     cuatro = matriz2[j][3];
     interseccion2(tres,cuatro);
-
   }
+
   interseccion2(0,0);
   for(var i=0; i<restriction; i++){
     for(var j=i+1; j<restriction; j++){
@@ -190,6 +202,9 @@ function ecuacion() {
   puntos = convexHull(puntos);
   poligono(puntos);
   puntoConvex(optima[0],optima[1]);
+
+  solucion.innerHTML = "La solucion optima es: X="+optima[0]+", Y="+optima[1];
+  solucionZ.innerHTML = "El valor optimo es Z = "+ (parseFloat(objetivoX*optima[0])+parseFloat(objetivoY*optima[1]));
   //document.getElementById("total").value=parseFloat(puntos[1][1]);
   //puntoConvex(optima[0],optima[1]);
   //document.getElementById("total").value=parseFloat(matriz2[0][0]);
@@ -225,7 +240,7 @@ function ecuacion() {
 
     function poligono(point){
         var origenX = 80;
-        var space = 4;
+        //var space = 4;
         var origenY = 440;
         //linea(origenX+(x0*space),origenY-(y0*space),origenX+(x1*space),origenY-(y1*space));
         lienzo1.beginPath();
@@ -263,12 +278,21 @@ function interseccion2(x,y){
   if(convex==entradas){
     //puntoConvex(x,y);
     puntos.push([x,y]);
+    if(maxmin==0){
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
       optima[0] = x;
       optima[1] = y;
       }
+    }else if(maxmin==1){
+      auxoptimo = objetivoX*x + objetivoY*y;
+      if(auxoptimo < grande){
+        grande = auxoptimo;
+        optima[0] = x;
+        optima[1] = y;
+        }
+    }
   }
 //document.getElementById("total").value=parseFloat(convex);
 
@@ -319,12 +343,21 @@ function interseccion(x1,y1,c1,x2,y2,c2){
   if(convex==entradas){
     //puntoConvex(x,y);
     puntos.push([x,y]);
+    if(maxmin==0){
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
       optima[0] = x;
       optima[1] = y;
       }
+    }else if(maxmin==1){
+      auxoptimo = objetivoX*x + objetivoY*y;
+      if(auxoptimo < grande){
+        grande = auxoptimo;
+        optima[0] = x;
+        optima[1] = y;
+        }
+    }
     }
 /*
       document.getElementById("total").value=parseFloat(convex);
@@ -352,7 +385,7 @@ function pendiente(x0,y0,x1,y1){
 
 function punto(x,y){
   var origenX = 80;
-  var space = 4;
+  //var space = 4;
   var origenY = 440;
 
   lienzo1.beginPath();
@@ -362,7 +395,7 @@ function punto(x,y){
 
 function puntoConvex(x,y){
   var origenX = 80;
-  var space = 4;
+  //var space = 4;
   var origenY = 440;
 
   lienzo1.beginPath();
@@ -423,7 +456,7 @@ function dibujaPlanoCartesiano(){
 
 function drawline(x0,y0,x1,y1){
   var origenX = 80;
-  var space = 4;
+  //var space = 4;
   var origenY = 440;
   linea(origenX+(x0*space),origenY-(y0*space),origenX+(x1*space),origenY-(y1*space));
 }
