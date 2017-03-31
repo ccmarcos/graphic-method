@@ -1,9 +1,102 @@
 body{
   height: 900px;
 }
+#navegacion{
+  max-width: auto;
+  height: 60px;
+  background-color: #2d3e52;
+  border: 2px solid #2d3e52;
+}
+#textvive{
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 21px;
+  margin-top: 13px;
+  padding-left: 52px;
+  left: 50px;
+}
+#bienvenida{
+  font-size: 20px;
+  color: #2d3e52;
+  font-family: 'Lato', sans-serif;
+}
+#objetivo{
+padding-left: 50px;
+padding-top: 25px;
+}
+#restricciones{
+  padding-left: 50px;
+  padding-top: 20px;
+
+}
+#botones{
+  padding-left: 50px;
+}
+#maxORmin{
+  padding: 5px 15px;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  background-color: #2d3e52;
+  font-family: 'Ubuntu', sans-serif;
+}
+#aceptar{
+	color: #2d3e52;
+	text-decoration: none;
+	font-family: 'Ubuntu', sans-serif;
+	padding: 15px;
+	font-size: 19px;
+  text-decoration: underline;
+}
+
+#solve{
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  background-color: #2d3e52;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#limpiar{
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  background-color: #CB4335;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#solve:hover{
+  background-color: #4965b5;
+}
+
 #canvas-contorno{
-  position: absolute;
+  position: relative;
   left: 300px;
-  top: 250px;
-  /*border: 1px solid red;*/
+  top: 170px;
+}
+#miform{
+position: relative;
+left: 50px;
+}
+#botones{
+  position: absolute;
+  left: 200px;
+}
+input[type="text"]{
+  height: 25px;
+  width: 50px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border: 1px solid #BDC2C9;
+}
+
+input[type="text"]:focus{
+outline:0px;
+-webkit-box-shadow: 0 0 1px 1px #6392c5;
+-moz-box-shadow: 0 0 1px 1px #6392c5;
+box-shadow: 0 0 1px 1px #6392c5;
 }

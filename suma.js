@@ -30,14 +30,14 @@ function newInput(){
       inpt1.id = "input1_"+c;
 
       document.f1.appendChild(inpt1);
-      document.f1.innerHTML+="X+";
+      document.f1.innerHTML+="<strong>X+</strong>";
 
       inpt2.type="text";
       inpt2.name = "input2_"+c;
       inpt2.id = "input2_"+c;
 
       document.f1.appendChild(inpt2);
-      document.f1.innerHTML+="Y";
+      document.f1.innerHTML+="<strong>Y</strong>";
 
       inpt3.type = "text";
       inpt3.name = "input3_"+c;
@@ -199,10 +199,11 @@ function ecuacion() {
     }
   }
 
+
   puntos = convexHull(puntos);
   poligono(puntos);
   puntoConvex(optima[0],optima[1]);
-
+  lineaSolucion(objetivoX,objetivoY,(parseFloat(objetivoX*optima[0])+parseFloat(objetivoY*optima[1])));
   solucion.innerHTML = "La solucion optima es: X="+optima[0]+", Y="+optima[1];
   solucionZ.innerHTML = "El valor optimo es Z = "+ (parseFloat(objetivoX*optima[0])+parseFloat(objetivoY*optima[1]));
   //document.getElementById("total").value=parseFloat(puntos[1][1]);
@@ -211,8 +212,14 @@ function ecuacion() {
   //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
 
+function lineaSolucion(x,y,c){
+  var x0,y1;
+  x0 = c/x;
+  y1 = c/y;
+  drawline(x0,0,0,y1);
+}
 
-    function convexHull(points) {
+function convexHull(points) {
         points.sort(function (a, b) {
             //return a.x != b.x ? a.x - b.x : a.y - b.y;
             return a[0] != b[0] ? a[0] - b[0] : a[1] - b[1];
@@ -244,13 +251,14 @@ function ecuacion() {
         var origenY = 440;
         //linea(origenX+(x0*space),origenY-(y0*space),origenX+(x1*space),origenY-(y1*space));
         lienzo1.beginPath();
-        lienzo1.strokeStyle="red";
-        lienzo1.fillStyle="green";
+        lienzo1.strokeStyle="#5D6D7E";
+        lienzo1.fillStyle="#5D6D7E";
         lienzo1.moveTo(origenX+(point[0][0]*space),origenY-(point[0][1]*space));
         for(var i=1; i<puntos.length; i++){
           lienzo1.lineTo(origenX+(point[i][0]*space),origenY-(point[i][1]*space));
         }
         lienzo1.stroke();
+        lienzo1.closePath();
         lienzo1.fill();
       }
 function interseccion2(x,y){

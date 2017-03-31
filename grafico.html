@@ -6,30 +6,37 @@
   <link rel="stylesheet" href="estilos.css">
 </head>
     <body>
-      Función objetivo<br/>
+      <nav id="navegacion">
+     <p id="textvive">Método Gráfico</p>
+   </nav>
+   <div id="objetivo">
+      <p id="bienvenida">Función objetivo</p>
       <select id="maxORmin">
         <option value="max">Max</option>
         <option value="min">Min</option>
       </select>
-      Z=
-      <input type="text" name="restricX" id="objX">X+
-      <input type="text" name="restricY" id="objY">Y<br/><br/>
-      # Restricciones
-      <input type="text" placeholder="restricciones" id="restric">
+      <strong>Z=</strong>
+      <input type="text" name="restricX" id="objX"><strong>X+</strong>
+      <input type="text" name="restricY" id="objY"><strong>Y</strong>
+    </div>
+      <div id="restricciones">
+      <strong># Restricciones</strong>
+      <input type="text" id="restric">
       <!--<input type="button" value="aceptar" onclick="dinamic()">-->
-      <a href="javascript:newInput()">Aceptar</a>
+      <a href="javascript:newInput()" id="aceptar">Aceptar</a>
 
       <form action="suma.js" name="f1" id="miform">
       </form>
+    </div>
 
-
-        <br/><input type="text" id="total" disabled value="0">
-        <!--<input type="text" id="valor1">x+
+        <!--<br/><input type="text" id="total" disabled value="0">
+        <input type="text" id="valor1">x+
         <input type="text" id="valor2">y=
         <input type="text" id="valor3">-->
-        <input type="button" onclick="limpiar();" value="limpiar" id="limpiar">
-        <input type="button" value="solve" onclick="ecuacion()">
-
+        <div id="botones">
+          <input type="button" onclick="limpiar();" value="limpiar" id="limpiar">
+          <input type="button" value="solve" onclick="ecuacion()" id="solve">
+        </div>
         <div class="dibujo-canvas" id="canvas-contorno">
           <canvas id="lienzo1" width="520" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
         </div>
