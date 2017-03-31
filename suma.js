@@ -3,10 +3,12 @@ var matriz = new Array(4);
 var matriz2 = new Array(4);
 var matriz3 = new Array(2);
 var optima =  new Array(2);
+var puntos = new Array()
 var optimo = 0;
 var auxoptimo;
 var objetivoX;
 var objetivoY;
+var pos=1;
 function newInput(){
   var c=0;
   var array = ["<=","=",">="];
@@ -41,13 +43,14 @@ function newInput(){
       document.f1.appendChild(selectList);
 
       c+=1;
-
+      if(c==1){
       for (var j = 0; j < array.length; j++) {
         var option = document.createElement("option");
         option.value = array[j];
         option.text = array[j];
         selectList.appendChild(option);
       }
+    }
       //document.getElementById("total").value=parseFloat(i);
       document.f1.appendChild(inpt3);
       document.f1.innerHTML+="<br/>"
@@ -183,13 +186,58 @@ function ecuacion() {
       interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
     }
   }
-  document.getElementById("total").value=parseFloat(optima[1]);
+
+  puntos = convexHull(puntos);
+  poligono(puntos);
+  puntoConvex(optima[0],optima[1]);
+  //document.getElementById("total").value=parseFloat(puntos[1][1]);
   //puntoConvex(optima[0],optima[1]);
   //document.getElementById("total").value=parseFloat(matriz2[0][0]);
   //interseccion(x1matriz,y1matriz,c1matriz,x2matriz,y2matriz,c2matriz);
 }
 
 
+    function convexHull(points) {
+        points.sort(function (a, b) {
+            //return a.x != b.x ? a.x - b.x : a.y - b.y;
+            return a[0] != b[0] ? a[0] - b[0] : a[1] - b[1];
+        });
+
+        var n = points.length;
+        var hull = [];
+
+        for (var i = 0; i < 2 * n; i++) {
+            var j = i < n ? i : 2 * n - 1 - i;
+            while (hull.length >= 2 && removeMiddle(hull[hull.length - 2], hull[hull.length - 1], points[j]))
+                hull.pop();
+            hull.push(points[j]);
+        }
+
+        hull.pop();
+        return hull;
+    }
+
+    function removeMiddle(a, b, c) {
+            var cross = (a[0] - b[0]) * (c[1] - b[1]) - (a[1] - b[1]) * (c[0] - b[0]);
+            var dot = (a[0] - b[0]) * (c[0] - b[0]) + (a[1] - b[1]) * (c[1] - b[1]);
+            return cross < 0 || cross == 0 && dot <= 0;
+        }
+
+    function poligono(point){
+        var origenX = 80;
+        var space = 4;
+        var origenY = 440;
+        //linea(origenX+(x0*space),origenY-(y0*space),origenX+(x1*space),origenY-(y1*space));
+        lienzo1.beginPath();
+        lienzo1.strokeStyle="red";
+        lienzo1.fillStyle="green";
+        lienzo1.moveTo(origenX+(point[0][0]*space),origenY-(point[0][1]*space));
+        for(var i=1; i<puntos.length; i++){
+          lienzo1.lineTo(origenX+(point[i][0]*space),origenY-(point[i][1]*space));
+        }
+        lienzo1.stroke();
+        lienzo1.fill();
+      }
 function interseccion2(x,y){
   var convex=0;
   var entradas = document.getElementById("restric").value;
@@ -213,7 +261,8 @@ function interseccion2(x,y){
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
   if(convex==entradas){
-    puntoConvex(x,y);
+    //puntoConvex(x,y);
+    puntos.push([x,y]);
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
@@ -268,7 +317,8 @@ function interseccion(x1,y1,c1,x2,y2,c2){
   //document.getElementById("total").value=parseFloat(convex);
   convex--;
   if(convex==entradas){
-    puntoConvex(x,y);
+    //puntoConvex(x,y);
+    puntos.push([x,y]);
     auxoptimo = objetivoX*x + objetivoY*y;
     if(auxoptimo > optimo){
       optimo = auxoptimo;
@@ -355,17 +405,17 @@ function dibujaPlanoCartesiano(){
     }
 
   for(var i=1; i<=13; i++){  //estructura de repeticion que pinta los numeros
-    if(auxNum1 == 520)
-      lienzo1.fillText("-2",40,530);
+    /*if(auxNum1 == 520)
+      lienzo1.fillText("-20",40,530);
     else if(auxNum1 == 480)
-        lienzo1.fillText("-1",40,490);
-    else if(auxNum1 < 440)
-      lienzo1.fillText(i-3,40,auxNum1);
+        lienzo1.fillText("-10",40,490);
+    else*/ if(auxNum1 < 440)
+      lienzo1.fillText((i-3)*10,40,auxNum1);
 
-    if(auxNum2 == 40)
-      lienzo1.fillText("-1",20,470);
-      else if(auxNum2 > 80)
-        lienzo1.fillText(i-2,auxNum2,470);
+    //if(auxNum2 == 40)
+      /*lienzo1.fillText("-10",20,470);
+      else*/ if(auxNum2 > 80)
+        lienzo1.fillText((i-2)*10,auxNum2,470);
     auxNum1-=40;
     auxNum2+=40
   }
