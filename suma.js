@@ -42,8 +42,7 @@ function newInput(){
       inpt3.type = "text";
       inpt3.name = "input3_"+c;
       inpt3.id = "input3_"+c;
-      //c+=1;
-
+      
       selectList.id = "input4_"+c;
       document.f1.appendChild(selectList);
 
