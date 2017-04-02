@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="utf-8">
-  <title>suma</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="utf-8">
+    <title>suma</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
-    <body>
-      <nav id="navegacion">
-     <p id="textvive">Método Gráfico</p>
-   </nav>
-   <div id="objetivo">
-      <p id="bienvenida">Función objetivo</p>
-      <select id="maxORmin">
+
+<body>
+    <nav id="navegacion">
+        <p id="textvive">Método Gráfico</p>
+    </nav>
+    <div id="objetivo">
+        <p id="bienvenida">Función objetivo</p>
+        <select id="maxORmin">
         <option value="max">Max</option>
         <option value="min">Min</option>
       </select>
-      <strong>Z=</strong>
-      <input type="text" name="restricX" id="objX"><strong>X+</strong>
-      <input type="text" name="restricY" id="objY"><strong>Y</strong>
+        <strong>Z=</strong>
+        <input type="text" name="restricX" id="objX"><strong>X+</strong>
+        <input type="text" name="restricY" id="objY"><strong>Y</strong>
     </div>
-      <div id="restricciones">
-      <strong># Restricciones</strong>
-      <input type="text" id="restric">
-      <!--<input type="button" value="aceptar" onclick="dinamic()">-->
-      <a href="javascript:newInput()" id="aceptar">Aceptar</a>
+    <div id="restricciones">
+        <strong># Restricciones</strong>
+        <input type="text" id="restric">
+        <!--<input type="button" value="aceptar" onclick="dinamic()">-->
+        <a href="javascript:newInput()" id="aceptar">Aceptar</a>
 
-      <form action="suma.js" name="f1" id="miform">
-      </form>
+        <form action="suma.js" name="f1" id="miform">
+        </form>
     </div>
 
-        <!--<br/><input type="text" id="total" disabled value="0">-->
-        <div id="botones">
-          <input type="button" onclick="limpiar();" value="limpiar" id="limpiar">
-          <input type="button" value="solve" onclick="ecuacion()" id="solve">
-        </div>
-        <div class="dibujo-canvas" id="canvas-contorno">
-          <canvas id="lienzo1" width="520" height="600"></canvas><script type="text/javascript" src="suma.js"></script>
-        </div>
+    <!--<br/><input type="text" id="total" disabled value="0">-->
 
-        <div id="solucion">
-        </div>
-        <div id="solucionZ">
-        </div>
-    </body>
+    <div id="botones">
+
+        <input type="button" value="solve" onclick="ecuacion()" id="solve">
+    </div>
+    <div class="dibujo-canvas" id="canvas-contorno">
+        <canvas id="lienzo1" width="520" height="600"></canvas>
+        <script type="text/javascript" src="suma.js"></script>
+    </div>
+
+    <div id="solucion">
+    </div>
+    <div id="solucionZ">
+    </div>
+</body>
+
 </html>
