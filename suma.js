@@ -15,6 +15,8 @@ var objetivoY;
 var space = 4;
 var maxmin;
 var grande = 100000000;
+var numPlanos;
+var prueba;
 
 function newInput() {
     var c = 0;
@@ -190,8 +192,10 @@ function ecuacion() {
     poligono(puntos);
     puntoConvex(optima[0], optima[1]);
     lineaSolucion(objetivoX, objetivoY, (parseFloat(objetivoX * optima[0]) + parseFloat(objetivoY * optima[1])));
-    solucion.innerHTML = "La solucion optima es: X=" + optima[0] + ", Y=" + optima[1];
+
+solucion.innerHTML = "La solucion optima es: X=" + optima[0] + ", Y=" + optima[1];
     solucionZ.innerHTML = "El valor optimo es Z = " + (parseFloat(objetivoX * optima[0]) + parseFloat(objetivoY * optima[1]));
+
     //document.getElementById("total").value=parseFloat(puntos[1][1]);
     //puntoConvex(optima[0],optima[1]);
     //document.getElementById("total").value=parseFloat(matriz2[0][0]);
@@ -203,7 +207,10 @@ function escala() {
     if (xmayor > ymayor)
         referencia = xmayor;
     else referencia = ymayor;
-    if (referencia > 10) {
+
+    numPlanos = referencia/10;
+     space = 400/referencia;
+  //  if (referencia > 10) {
         dibujaPlanoCartesiano();
         for (var i = 0; i < restriction; i++) {
             if (matriz2[i][0] < 0 || matriz2[i][3] < 0)
@@ -213,24 +220,25 @@ function escala() {
             else drawline(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
         }
 
-    }
-    if (referencia <= 10) {
-        dibujaPlanoCartesiano2();
-        space = 40;
-        for (var i = 0; i < restriction; i++) {
-            if (matriz2[i][0] < 0 || matriz2[i][3] < 0)
-                pendiente(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
-            else if (matriz2[i][0] == 0 && matriz2[i][1] == 0)
-                pendiente(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
-            else drawline(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
-        }
-    }
+    //}
+  //  if (referencia <= 10) {
+    //    dibujaPlanoCartesiano2();
+    //    space = 40;
+      //  for (var i = 0; i < restriction; i++) {
+      //      if (matriz2[i][0] < 0 || matriz2[i][3] < 0)
+      //          pendiente(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
+        //    else if (matriz2[i][0] == 0 && matriz2[i][1] == 0)
+          //      pendiente(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
+          //  else drawline(matriz2[i][0], matriz2[i][1], matriz2[i][2], matriz2[i][3]);
+      //  }
+  //  }
 }
 
 function lineaSolucion(x, y, c) {
     var x0, y1;
     x0 = c / x;
     y1 = c / y;
+  //  lienzo1.strokeStyle = "red";
     drawline(x0, 0, 0, y1);
 }
 
@@ -408,7 +416,7 @@ function ejercicio1() {
     lienzo1 = ej1.getContext("2d"); //alisto el canvas para que funcione
     lienzo1.lineWidth = 1; //defino el ancho de la linea en pixeles
     lienzo1.strokeStyle = '#000000'; //defino el color en hexadecimal
-    lienzo1.font = "bold 20px sans-serif";
+    lienzo1.font = "bold 17px sans-serif";
 
     //dibujaPlanoCartesiano();
 }
@@ -443,13 +451,14 @@ function dibujaPlanoCartesiano() {
             lienzo1.fillText("-10",40,490);
         else*/
         if (auxNum1 < 440)
-            lienzo1.fillText((i - 3) * 10, 40, auxNum1);
+
+            lienzo1.fillText(((i - 3) * numPlanos).toFixed(1), 40, auxNum1);
 
         //if(auxNum2 == 40)
         /*lienzo1.fillText("-10",20,470);
         else*/
         if (auxNum2 > 80)
-            lienzo1.fillText((i - 2) * 10, auxNum2, 470);
+            lienzo1.fillText(((i - 2) * numPlanos).toFixed(1), auxNum2, 470);
         auxNum1 -= 40;
         auxNum2 += 40
     }

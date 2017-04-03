@@ -1,7 +1,9 @@
 body {
     height: 900px;
 }
-
+html {
+  overflow-x:hidden; 
+}
 #navegacion {
     max-width: auto;
     height: 60px;
@@ -18,6 +20,14 @@ body {
     left: 50px;
 }
 
+#solucion{
+  position: relative;
+  top: 110px;
+}
+#solucionZ{
+  position: relative;
+  top: 120px;
+}
 #bienvenida {
     font-size: 20px;
     color: #2d3e52;
